@@ -2,6 +2,7 @@ package com.example.appcolorpicker13072020;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,7 +16,7 @@ public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBar
     TextView mTvHex,mTvRBG;
     SeekBar mSkB,mSkR,mSkA,mSkG;
     ImageView mImage;
-    int mRed,mGreen,mBlue,mAlpha;
+    int mRed,mGreen,mBlue,mAlpha,mColor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,7 +30,7 @@ public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBar
         mSkB = findViewById(R.id.seekbarBlue);
         mImage = findViewById(R.id.imageview);
 
-        mRed = mGreen = mBlue = mAlpha = 0;
+        mRed = mGreen = mBlue = mAlpha = mColor = 0;
         mSkA.setMax(255);
         mSkR.setMax(255);
         mSkG.setMax(255);
@@ -60,7 +61,9 @@ public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBar
                 break;
         }
 //        mAlpha = seekBar.getId() == R.id.seekbarAlpha ? mAlpha = progress : (seekBar.getId() == R.id.seekbarRed) ? mRed = progress : (seekBar.getId() == R.id.seekbarGreen) ? mGreen = progress : (seekBar.getId() == R.id.seekbarBlue) ? mBlue = progress : mBlue;
-        mImage.setBackgroundColor(Color.argb(mAlpha,mRed,mGreen,mBlue));
+        mColor = Color.argb(mAlpha,mRed,mGreen,mBlue);
+        mImage.setBackgroundColor(mColor);
+        mTvHex.setText(String.format("HEX # %s %s",Integer.toHexString(mAlpha), Integer.toHexString(mColor)));
         mTvRBG.setText(String.format("RBG 255 %d %d %d",mRed,mGreen,mBlue));
     }
 
